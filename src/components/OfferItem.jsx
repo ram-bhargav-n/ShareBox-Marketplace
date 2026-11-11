@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import {
   PackagePlus,
   MapPin,
-  X,
   LoaderCircle,
   ArrowLeft,
   ImagePlus,
 } from "lucide-react";
+import { API_URL, readApiResponse } from "../lib/api";
+import { ITEM_CATEGORIES } from "../lib/categories";
 
 const CLOUD_NAME = "tmsj9ho8";
 const UPLOAD_PRESET = "sharebox_unsigned";
@@ -19,6 +20,7 @@ function OfferItem() {
   const [formData, setFormData] = useState({
     itemName: "",
     itemDescription: "",
+    category: "",
     sharingType: "",
     itemLocation: "",
   });
@@ -104,7 +106,7 @@ function OfferItem() {
           }
         );
 
-        const uploadResult = await uploadResponse.json();
+        const uploadResult = await readApiResponse(uploadResponse);
 
         if (!uploadResponse.ok) {
           throw new Error(
@@ -116,8 +118,9 @@ function OfferItem() {
       }
 
 
-      const response = await fetch("http://localhost:5000/api/items", {
+      const response = await fetch(`${API_URL}/items`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -126,13 +129,20 @@ function OfferItem() {
           itemImage: imageUrls,
         }),
       });
+      const data = await readApiResponse(response);
 
-      const data = await response.json();
+// Redirect unauthenticated users to Login
+if (response.status === 401) {
+  navigate("/login", {
+    replace: true,
+    state: { from: "/offer-item" },
+  });
+  return;
+}
 
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to publish listing.");
-      }
-
+if (!response.ok) {
+  throw new Error(data.message || "Failed to publish listing.");
+}
       setMessage("Listing published successfully!");
       setMessageType("success");
 
@@ -142,6 +152,7 @@ function OfferItem() {
       setFormData({
         itemName: "",
         itemDescription: "",
+        category: "",
         sharingType: "",
         itemLocation: "",
       });
@@ -264,6 +275,31 @@ function OfferItem() {
               <p className="text-right text-xs text-slate-400">
                 {formData.itemDescription.length}/2000 characters
               </p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="category"
+                className="text-sm font-semibold text-slate-800"
+              >
+                Category <span className="text-red-500">*</span>
+              </label>
+
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                required
+                className="w-full cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+              >
+                <option value="">Choose a category</option>
+                {ITEM_CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="flex flex-col gap-2">

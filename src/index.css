@@ -1,43 +1,237 @@
 @import "tailwindcss";
 
-
 @theme {
+  --color-sharebox-burgundy: #641E32;
+  --color-sharebox-sage: #A3B18A;
+  --color-sharebox-sage-grey: #7D8976;
+  --color-sharebox-cream: #F7F3EB;
+  --color-sharebox-beige: #E8DFD0;
+  --color-sharebox-charcoal: #292725;
+  --color-sharebox-white: #FFFFFF;
+
+  --color-slate-50: #F7F3EB;
+  --color-slate-100: #F1ECE3;
+  --color-slate-200: #E8DFD0;
+  --color-slate-300: #D1C8B9;
+  --color-slate-400: #A69E91;
+  --color-slate-500: #7D8976;
+  --color-slate-600: #66705F;
+  --color-slate-700: #4B5346;
+  --color-slate-800: #343832;
+  --color-slate-900: #292725;
+  --color-slate-950: #201F1D;
+
+  --color-indigo-50: #F8EEF0;
+  --color-indigo-100: #F0DDE2;
+  --color-indigo-200: #E4C0CA;
+  --color-indigo-300: #D29CAB;
+  --color-indigo-400: #B87386;
+  --color-indigo-500: #91465D;
+  --color-indigo-600: #641E32;
+  --color-indigo-700: #53192B;
+  --color-indigo-800: #421523;
+  --color-indigo-900: #34201F;
+
+  --color-blue-100: #F0DDE2;
+  --color-blue-600: #641E32;
+  --color-blue-700: #53192B;
+  --color-sky-100: #F0DDE2;
+  --color-sky-600: #641E32;
+
+  --color-purple-100: #F0DDE2;
+  --color-purple-600: #641E32;
+  --color-purple-700: #53192B;
+  --color-violet-50: #F8EEF0;
+  --color-violet-700: #53192B;
+
+  --color-green-50: #F3F5EF;
+  --color-green-100: #E5EAD9;
+  --color-green-500: #A3B18A;
+  --color-green-600: #7D8976;
+  --color-green-700: #66705F;
+  --color-emerald-50: #F3F5EF;
+  --color-emerald-500: #A3B18A;
+  --color-emerald-700: #66705F;
+  --color-teal-50: #F3F5EF;
+  --color-teal-100: #E5EAD9;
+  --color-teal-600: #7D8976;
+  --color-cyan-50: #F3F5EF;
+  --color-cyan-100: #E5EAD9;
+  --color-cyan-600: #7D8976;
+  --color-lime-50: #F3F5EF;
+  --color-lime-100: #E5EAD9;
+  --color-lime-600: #7D8976;
+
+  --color-amber-50: #F7F3EB;
+  --color-amber-100: #E8DFD0;
+  --color-amber-200: #E8DFD0;
+  --color-amber-400: #A3B18A;
+  --color-amber-600: #7D8976;
+  --color-amber-700: #66705F;
+  --color-amber-900: #292725;
+  --color-yellow-100: #E8DFD0;
+  --color-yellow-500: #A3B18A;
+  --color-yellow-700: #66705F;
+
+  --color-red-50: #F8EEF0;
+  --color-red-100: #F0DDE2;
+  --color-red-200: #E4C0CA;
+  --color-red-300: #D29CAB;
+  --color-red-500: #91465D;
+  --color-red-600: #641E32;
+  --color-red-700: #53192B;
+  --color-red-800: #421523;
+  --color-rose-50: #F8EEF0;
+  --color-rose-100: #F0DDE2;
+  --color-rose-600: #641E32;
+  --color-rose-700: #53192B;
+  --color-pink-50: #F8EEF0;
+  --color-pink-100: #F0DDE2;
+  --color-pink-600: #641E32;
+  --color-orange-50: #F7F3EB;
+  --color-orange-100: #E8DFD0;
+  --color-orange-500: #A3B18A;
+  --color-orange-600: #7D8976;
+  --color-orange-700: #66705F;
+
   --animate-marquee: marquee 45s linear infinite;
 
   @keyframes marquee {
     from {
       transform: translateX(0);
     }
+
     to {
       transform: translateX(-50%);
     }
   }
 }
 
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
 
+  color: #292725;
+  background: #F7F3EB;
 
-/* ShareBox scrollbar theme */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --sb-burgundy: #641E32;
+  --sb-sage: #A3B18A;
+  --sb-sage-grey: #7D8976;
+  --sb-cream: #F7F3EB;
+  --sb-beige: #E8DFD0;
+  --sb-charcoal: #292725;
+  --sb-white: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--sb-cream);
+  color: var(--sb-charcoal);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--sb-burgundy);
+  outline-offset: 2px;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--sb-sage);
+  color: var(--sb-charcoal);
+}
+
+/* Scrollbar */
+
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: var(--sb-cream);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C7D2FE;
-  border: 2px solid #F8FAFC;
+  background: var(--sb-sage);
+  border: 2px solid var(--sb-cream);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6366F1;
+  background: var(--sb-burgundy);
 }
 
-/* Firefox support */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #C7D2FE #F8FAFC;
+  scrollbar-color: var(--sb-sage) var(--sb-cream);
+}
+
+.market-icon-link {
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 10px;
+  padding: 8px 10px;
+  color: var(--sb-charcoal);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.market-icon-link:hover {
+  background: var(--sb-cream);
+  color: var(--sb-burgundy);
+}
+
+.market-menu-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 9px;
+  padding: 10px 12px;
+  color: var(--sb-charcoal);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.market-menu-link:hover {
+  background: var(--sb-cream);
+  color: var(--sb-burgundy);
 }
